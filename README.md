@@ -1,56 +1,103 @@
-# Welcome to your Expo app 👋
+# Multiverse
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A small React Native app built for the Multiverse challenge using Expo and the Rick and Morty API. It lets users browse characters, search and filter results, view character details, and save persistent favorites across the app.
 
-## Get started
+## Overview
 
-1. Install dependencies
+The app is built with Expo, Expo Router, NativeWind, TanStack Query, and strict TypeScript, matching the technical requirements described in the challenge. Navigation is file-based, with tabs for the main experience and a dynamic route for the character details screen.
 
-    ```bash
-    npm install
-    ```
+## Features
 
-2. Start the app
+- Character list screen with API-driven data fetching.
+- Search support using the Rick and Morty API `name` parameter.
+- Filters for status, gender, and species based on supported API query parameters.
+- Pagination or infinite-scroll friendly architecture powered by TanStack Query.
+- Character detail screen implemented with an Expo Router dynamic route such as `[id]`.
+- Favorites tab with add/remove actions from multiple screens.
+- Persisted favorites so selections survive app restarts.
+- Loading, error, and empty states for a more complete UX.
+- Localization support.
 
-    ```bash
-    npx expo start
-    ```
+## Tech stack
 
-In the output, you'll find options to open the app in a
+- Expo (managed workflow)
+- Expo Router
+- React Native
+- TypeScript with `strict: true`
+- NativeWind v4 + Tailwind
+- `@tanstack/react-query`
+- AsyncStorage
+- `react-i18next` / `i18next`
+- `react-native-reanimated`
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## API
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+This project uses the [Rick and Morty API](https://rickandmortyapi.com/documentation). The character endpoint supports filters such as `name`, `status`, `species`, and `gender`, which map well to the challenge requirements.[1]
 
-## Get a fresh project
+## Project structure
 
-When you're ready, run:
-
-```bash
-npm run reset-project
+```txt
+app/
+  (tabs)/
+  character/
+    [id].tsx
+components/
+hooks/
+services/
+store/
+locales/
+types/
+utils/
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+The exact folder names may vary slightly, but the important architectural idea is that routing, API logic, shared state, and reusable UI stay separated and easy to review.
 
-### Other setup steps
+## Getting started
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+### 1. Install dependencies
 
-## Learn more
+```bash
+npm install
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+### 2. Start the Expo development server
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```bash
+npx expo start
+```
 
-## Join the community
+### 3. Run on a device or simulator
 
-Join our community of developers creating universal apps.
+- Press `a` for Android emulator.
+- Press `i` for iOS simulator on macOS.
+- Scan the QR code with Expo Go or open the development build, depending on your local setup. The app will probably not work on Expo Go though, due to the native dependencies, so using a development build is recommended.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## Implementation notes
+
+- **Remote data** is handled with TanStack Query, which is designed for promise-based asynchronous queries and works with React Native.
+- **Navigation** is handled by Expo Router using file-based routing and dynamic route segments.
+- **Favorites** are stored in shared app state and persisted locally so they are available across screens and app restarts.
+- **Styling** is done with NativeWind to keep components consistent and easy to maintain. Note: NativeWind 4 is problematic with hot reload and crashes metro sometimes.
+- **Localization** is included to support a multi-language experience.
+
+## Challenge coverage
+
+| Requirement                            | Status      |
+| -------------------------------------- | ----------- |
+| List screen                            | Implemented |
+| Search and/or filter                   | Implemented |
+| Detail screen with dynamic route       | Implemented |
+| Favorites in separate tab              | Implemented |
+| Shared favorites access across screens | Implemented |
+| Persisted favorites                    | Implemented |
+| Loading, error, and empty states       | Implemented |
+| Expo Router + layout group             | Implemented |
+| TanStack Query as data layer           | Implemented |
+| TypeScript strict mode                 | Implemented |
+| Bonus: localization                    | Implemented |
+
+## Notes for reviewers
+
+This project was built as a focused coding challenge submission, so the main goal was clear architecture, good mobile UX, and clean implementation of the requested features rather than adding unnecessary complexity. The app is intentionally small, but it demonstrates routing, server-state management, local persistence, reusable components, and a scalable project structure.
+
+Thanks for taking the time to review this submission!
