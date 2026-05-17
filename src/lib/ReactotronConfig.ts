@@ -1,11 +1,12 @@
 import Reactotron from "reactotron-react-native";
 
-Reactotron.configure({
-    port: 9090,
-}) // controls connection & communication settings
-    .useReactNative() // add all built-in react native plugins
-    .connect(); // let's connect!
-
-console.tron = Reactotron;
+if (__DEV__) {
+    Reactotron.configure({ port: 9090 }).useReactNative().connect();
+    console.tron = Reactotron;
+} else {
+    // No-op proxy: any console.tron.anyMethod() call is silently ignored in production builds
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    console.tron = new Proxy({} as any, { get: () => () => {} });
+}
 
 export default Reactotron;

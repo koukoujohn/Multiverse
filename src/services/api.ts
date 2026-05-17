@@ -89,6 +89,8 @@ export const getCharactersByIds = async (ids: number[]): Promise<Character[]> =>
     const response = await client.get(`/character/${ids.join(",")}`);
     const data = response.data;
 
+    console.tron.log("GET Characters By IDs Response:", response);
+
     // Normalize: single-object vs array depending on how many IDs were requested
     if (Array.isArray(data)) return data;
     return [data];

@@ -4,13 +4,9 @@ import Providers from "@/components/Providers";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import "../global.css";
+import "../lib/ReactotronConfig";
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
-
-// To debug with reactotron in dev client apps only
-if (__DEV__) {
-    import("../lib/ReactotronConfig");
-}
 
 /**
  * RootLayout - App root with all providers and initialization
