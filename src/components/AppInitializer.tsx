@@ -1,4 +1,5 @@
 import OfflineBanner from "@/components/OfflineBanner";
+import { ENUMS } from "@/enums";
 import { useNetworkState } from "@/hooks/useNetworkState";
 import { i18n } from "@/lib";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -7,7 +8,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { ReactNode, useEffect, useState } from "react";
 import { View } from "react-native";
 
-const LANG_KEY = "user-language";
+const LANG_KEY = ENUMS.LANG_KEY;
 
 /**
  * Initialize app language on first load

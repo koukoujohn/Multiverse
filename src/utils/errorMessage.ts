@@ -4,27 +4,8 @@
  */
 
 import { i18n } from "@/lib";
+import { getRetryAfterMs } from "@/utils/retryAfter";
 import axios from "axios";
-
-// Parses the Retry-After header (seconds or HTTP-date) into milliseconds
-function getRetryAfterMs(error: unknown): number | undefined {
-    if (!axios.isAxiosError(error)) return undefined;
-
-    const header = error.response?.headers?.["retry-after"];
-    if (!header) return undefined;
-
-    const raw = Array.isArray(header) ? header[0] : String(header);
-
-    const seconds = Number(raw);
-    if (!Number.isNaN(seconds)) {
-        return Math.max(0, seconds * 1000);
-    }
-
-    const dateMs = Date.parse(raw);
-    if (Number.isNaN(dateMs)) return undefined;
-
-    return Math.max(0, dateMs - Date.now());
-}
 
 // Formats a millisecond duration as "30s" or "5m"
 function formatRetryAfter(ms: number): string {

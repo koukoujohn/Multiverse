@@ -35,6 +35,8 @@ function FavoritesScreen() {
     });
 
     // Maintain user's preferred order by mapping sorted IDs to fetched character data
+    // Same .length rationale as sortedFavorites: favorites can only be added or removed,
+    // never swapped in place, so a length change is the only meaningful signal.
     const orderedCharacters = useMemo(() => {
         if (!favoriteCharacters?.length) return [];
 
@@ -60,6 +62,8 @@ function FavoritesScreen() {
                     ))}
                 </View>
             ) : (
+                // We use FlatList instead of FlashList here because the list is expected to be small (user's favorites) and FlatList has better performance with very short lists due to lower overhead.
+                // FlashList shines with larger datasets, but for a favorites screen where users typically have a limited number of items, FlatList provides a more efficient rendering experience.
                 <FlatList
                     data={orderedCharacters}
                     keyExtractor={(item) => item.id.toString()}

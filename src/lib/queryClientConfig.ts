@@ -1,34 +1,10 @@
+import { getRetryAfterMs } from "@/utils/retryAfter";
 import { QueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
 // Cache durations for React Query
 const FIVE_MINUTES = 5 * 60 * 1000;
 const THIRTY_MINUTES = 30 * 60 * 1000;
-
-/**
- * Extracts retry-after duration from error response headers
- * Handles both HTTP-date and second-delta formats per RFC 7231
- */
-function getRetryAfterMs(error: unknown): number | undefined {
-    if (!axios.isAxiosError(error)) return undefined;
-
-    const header = error.response?.headers?.["retry-after"];
-    if (!header) return undefined;
-
-    const raw = Array.isArray(header) ? header[0] : String(header);
-    const seconds = Number(raw);
-
-    // Check if header value is in seconds format
-    if (!Number.isNaN(seconds)) {
-        return Math.max(0, seconds * 1000);
-    }
-
-    // Try parsing as HTTP-date format
-    const dateMs = Date.parse(raw);
-    if (Number.isNaN(dateMs)) return undefined;
-
-    return Math.max(0, dateMs - Date.now());
-}
 
 /**
  * Creates a singleton QueryClient with optimized caching and retry strategies

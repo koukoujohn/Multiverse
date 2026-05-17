@@ -3,10 +3,11 @@
  * Saved preference is loaded at startup by AppInitializer.
  */
 
+import { ENUMS } from "@/enums";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useTranslation } from "react-i18next";
 
-const LANG_KEY = "user-language";
+const LANG_KEY = ENUMS.LANG_KEY;
 
 export function useLanguage() {
     const { i18n } = useTranslation();

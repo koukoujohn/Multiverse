@@ -70,11 +70,11 @@ export default function CharactersScreen() {
         return <ActivityIndicator className="py-4" />;
     }, [isFetchingNextPage]);
 
-    const handleEndReached = useCallback(() => {
+    const handleEndReached = () => {
         if (hasNextPage && !isFetchingNextPage) {
             fetchNextPage();
         }
-    }, [hasNextPage, isFetchingNextPage]);
+    };
 
     if (isError) {
         const message = getErrorMessage(error);
@@ -112,6 +112,7 @@ export default function CharactersScreen() {
                     ))}
                 </View>
             ) : (
+                // We use FlashList for better performance with large lists, especially with pagination and images
                 <FlashList
                     data={characters}
                     keyExtractor={(item) => item.id.toString()}

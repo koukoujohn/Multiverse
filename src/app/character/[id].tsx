@@ -1,9 +1,10 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useQuery } from "@tanstack/react-query";
+import { Image } from "expo-image";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { Image, Pressable, ScrollView, Text, View } from "react-native";
+import { Pressable, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import FavoriteButton from "@/components/FavoriteButton";
@@ -72,7 +73,7 @@ export default function CharacterDetail() {
             <ScrollView className="flex-1 bg-white">
                 {/* Hero section with character image and back button */}
                 <View>
-                    <Image source={{ uri: character.image }} className="h-72 w-full" resizeMode="cover" />
+                    <Image source={character.image} style={{ height: 288, width: "100%" }} contentFit="cover" cachePolicy="memory-disk" />
                     <Pressable onPress={() => router.back()} className="absolute left-4 top-4 h-10 w-10 items-center justify-center rounded-full bg-black/20">
                         <Ionicons name="chevron-back" size={22} color="#fff" />
                     </Pressable>
