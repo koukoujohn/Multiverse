@@ -3,8 +3,15 @@ import NavigationStack from "@/components/NavigationStack";
 import Providers from "@/components/Providers";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
+import { LogBox } from "react-native";
 import "../global.css";
 import "../lib/ReactotronConfig";
+
+// Suppress warning caused by an incompatibility between @gorhom/bottom-sheet v5 and
+// react-native-reanimated v4 (Expo SDK 55). findNodeHandle() returns null under Fabric
+// (New Architecture). The library is unmaintained with no upstream fix available.
+// Dismiss/scroll gestures are unaffected. https://github.com/gorhom/react-native-bottom-sheet/discussions/2641
+LogBox.ignoreLogs(["Couldn't find the scrollable node handle id!"]);
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
 

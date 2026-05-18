@@ -1,7 +1,7 @@
 import { getQueryClient } from "@/lib/queryClientConfig";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { QueryClientProvider } from "@tanstack/react-query";
-import { ReactNode } from "react";
+import { ReactNode, useMemo } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
@@ -18,7 +18,7 @@ interface ProvidersProps {
  * 4. BottomSheetModalProvider - Enables bottom sheet modals throughout app
  */
 export default function Providers({ children }: ProvidersProps) {
-    const queryClient = getQueryClient();
+    const queryClient = useMemo(() => getQueryClient(), []);
 
     return (
         <GestureHandlerRootView style={{ flex: 1 }}>
