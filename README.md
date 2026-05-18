@@ -80,6 +80,16 @@ npx expo start
 - **Styling** is done with NativeWind to keep components consistent and easy to maintain. Note: NativeWind 4 is problematic with hot reload and crashes metro sometimes.
 - **Localization** is included to support a multi-language experience.
 
+## Testing
+
+Basic automated tests are included. (AI assisted, so they are not comprehensive but demonstrate the approach.)
+
+Run them with:
+
+```bash
+npm run test
+```
+
 ## Challenge coverage
 
 | Requirement                            | Status      |
