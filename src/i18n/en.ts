@@ -9,6 +9,7 @@ const en = {
     filters: {
         title: "Filters",
         subtitle: "Narrow your search.",
+        name: "Name",
         status: "Status",
         gender: "Gender",
         species: "Species",

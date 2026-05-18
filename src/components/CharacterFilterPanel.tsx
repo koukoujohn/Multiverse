@@ -2,7 +2,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { BottomSheetBackdrop, BottomSheetModal, BottomSheetScrollView } from "@gorhom/bottom-sheet";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { Pressable, Text, TouchableOpacity, View } from "react-native";
+import { Pressable, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 // Filter options for status, gender, and species
 const STATUS_FILTERS = ["", "alive", "dead", "unknown"] as const;
@@ -24,6 +24,8 @@ function FilterChip({ label, active, onPress }: { label: string; active: boolean
 
 interface CharacterFilterPanelProps {
     filterSheetRef: React.RefObject<BottomSheetModal | null>;
+    name: string;
+    setName: (name: string) => void;
     status: string;
     setStatus: (status: string) => void;
     gender: string;
@@ -37,7 +39,18 @@ interface CharacterFilterPanelProps {
  * CharacterFilterPanel - Bottom sheet modal containing all character filters
  * Manages status, gender, and species filtering with chip-based UI
  */
-export default function CharacterFilterPanel({ filterSheetRef, status, setStatus, gender, setGender, species, setSpecies, onResetFilters }: CharacterFilterPanelProps) {
+export default function CharacterFilterPanel({
+    filterSheetRef,
+    name,
+    setName,
+    status,
+    setStatus,
+    gender,
+    setGender,
+    species,
+    setSpecies,
+    onResetFilters,
+}: CharacterFilterPanelProps) {
     const { t } = useTranslation();
 
     const closeFilterSheet = () => filterSheetRef.current?.dismiss();
@@ -70,6 +83,18 @@ export default function CharacterFilterPanel({ filterSheetRef, status, setStatus
                     <Pressable onPress={closeFilterSheet} className="h-10 w-10 items-center justify-center rounded-full bg-white border border-gray-200">
                         <Ionicons name="close" size={20} color="#374151" />
                     </Pressable>
+                </View>
+
+                {/* Name search */}
+                <View className="mb-5 rounded-2xl bg-white p-4 shadow-sm">
+                    <Text className="mb-3 text-sm font-semibold text-gray-900">{t("filters.name")}</Text>
+                    <TextInput
+                        className="rounded-xl bg-gray-50 border border-gray-200 px-4 py-3 text-base"
+                        placeholder={t("search.placeholder")}
+                        placeholderTextColor="#9CA3AF"
+                        value={name}
+                        onChangeText={setName}
+                    />
                 </View>
 
                 {/* Status filter section */}

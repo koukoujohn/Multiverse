@@ -128,6 +128,8 @@ export default function CharactersScreen() {
             {/* Filter panel in bottom sheet modal */}
             <CharacterFilterPanel
                 filterSheetRef={filterSheetRef}
+                name={search}
+                setName={setSearch}
                 status={status}
                 setStatus={setStatus}
                 gender={gender}

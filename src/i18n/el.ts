@@ -9,6 +9,7 @@ const el = {
     filters: {
         title: "Φίλτρα",
         subtitle: "Περιόρισε την αναζήτησή σου.",
+        name: "Όνομα",
         status: "Κατάσταση",
         gender: "Φύλο",
         species: "Είδος",

@@ -26,7 +26,7 @@ interface FavoriteButtonProps {
 // "detail" = large header button without background
 const variantStyles: Record<FavoriteButtonVariant, { className?: string; size: number }> = {
     card: {
-        className: "mr-3 h-12 w-12 items-center justify-center rounded-full bg-gray-100",
+        className: "mr-3 h-12 w-12 items-center justify-center rounded-full",
         size: 24,
     },
     detail: {
