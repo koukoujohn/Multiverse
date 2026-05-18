@@ -11,7 +11,14 @@ import "../lib/ReactotronConfig";
 // react-native-reanimated v4 (Expo SDK 55). findNodeHandle() returns null under Fabric
 // (New Architecture). The library is unmaintained with no upstream fix available.
 // Dismiss/scroll gestures are unaffected. https://github.com/gorhom/react-native-bottom-sheet/discussions/2641
+//
+// LogBox.ignoreLogs hides the in-app overlay; the console.warn patch silences Metro terminal output.
 LogBox.ignoreLogs(["Couldn't find the scrollable node handle id!"]);
+const _warn = console.warn.bind(console);
+console.warn = (...args: Parameters<typeof console.warn>) => {
+    if (typeof args[0] === "string" && args[0].includes("Couldn't find the scrollable node handle id!")) return;
+    _warn(...args);
+};
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
 
