@@ -9,8 +9,16 @@
         "ios": "expo start --ios",
         "web": "expo start --web",
         "lint": "expo lint",
+        "test": "jest",
+        "test:watch": "jest --watch",
         "format": "prettier --write .",
         "build:android:dev": "eas build --profile development --platform android"
+    },
+    "jest": {
+        "preset": "jest-expo",
+        "moduleNameMapper": {
+            "^@/(.*)$": "<rootDir>/src/$1"
+        }
     },
     "dependencies": {
         "@gorhom/bottom-sheet": "^5.2.14",
@@ -55,6 +63,8 @@
         "zustand": "^5.0.13"
     },
     "devDependencies": {
+        "@testing-library/react-native": "~13.3.3",
+        "@types/jest": "~30.0.0",
         "@types/lodash": "^4.17.24",
         "@types/react": "~19.2.2",
         "@typescript-eslint/eslint-plugin": "^8.59.3",
@@ -63,9 +73,11 @@
         "eslint": "^8.57.1",
         "eslint-config-prettier": "^10.1.8",
         "eslint-plugin-prettier": "^5.5.5",
+        "jest-expo": "~55.0.17",
         "patch-package": "^8.0.1",
         "prettier": "^3.8.3",
         "prettier-plugin-tailwindcss": "^0.5.11",
+        "react-test-renderer": "^19.2.0",
         "reactotron-react-native": "^5.1.18",
         "typescript": "~5.9.2"
     },
